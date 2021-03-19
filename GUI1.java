@@ -8,53 +8,52 @@ import java.io.File;
 
 public class GUI1{
 
-    private static JLabel userLabel;
-    private static JTextField userText;
-    private static JLabel passwordLabel;
-    private static JPasswordField passwordText;
-    private static JButton button;
-    private static JLabel success;
-    private static JLabel letsDoIt;
-
+    private static JPanel panel;
+    private static JFrame frame = new JFrame();
 
     public static void login(){
 
-        JPanel panel = new JPanel();
-        JFrame frame = new JFrame();
+        panel = new JPanel();
+        //frame = new JFrame();
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
 
         panel.setLayout(null);
 
-        letsDoIt = new JLabel("Let's Do It!");
+        JLabel letsDoIt = new JLabel("Let's Do It!");
         letsDoIt.setBounds(100, 20, 80, 25);
         panel.add(letsDoIt);
 
-        userLabel = new JLabel("User");
+        JLabel userLabel = new JLabel("User");
         userLabel.setBounds(30, 50, 80, 25);
         panel.add(userLabel);
 
-        userText = new JTextField();
+        JTextField userText = new JTextField();
         userText.setBounds(120, 50, 165, 25);
         panel.add(userText);
 
-        passwordLabel = new JLabel("Password");
+        JLabel passwordLabel = new JLabel("Password");
         passwordLabel.setBounds(30, 80, 80, 25);
         panel.add(passwordLabel);
 
-        passwordText = new JPasswordField();
+        JPasswordField passwordText = new JPasswordField();
         passwordText.setBounds(120, 80, 165, 25);
         panel.add(passwordText);
 
-        button = new JButton(new AbstractAction("Login") {
+        JLabel success = new JLabel("");
+        success.setBounds(30, 140, 300, 25);
+        panel.add(success);
+
+        JButton button = new JButton(new AbstractAction("Login") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String user = userText.getText();
                 String password = passwordText.getText();
 
                 if (user.equals("Team24") && password.equals("1234")) {
-                    success.setText("Login successful!");
+                    //success.setText("Login successful!");
+                    frame.remove(panel);
                     uploadFile();
                 }
                 else {
@@ -65,10 +64,6 @@ public class GUI1{
         button.setBounds(30, 110, 80, 25);
         panel.add(button);
 
-        success = new JLabel("");
-        success.setBounds(30, 140, 300, 25);
-        panel.add(success);
-
 
         frame.setVisible(true);
     }
@@ -76,8 +71,8 @@ public class GUI1{
 
     public static void uploadFile() {
 
-        JPanel panel = new JPanel();
-        JFrame frame = new JFrame();
+        panel = new JPanel();
+        //frame = new JFrame();
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
@@ -112,6 +107,7 @@ public class GUI1{
         JButton exitButton = new JButton(new AbstractAction("Exit to Login") {
             @Override
             public void actionPerformed(ActionEvent e) {
+                frame.remove(panel);
                 login();
             }
         });
