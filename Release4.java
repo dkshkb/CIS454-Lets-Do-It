@@ -162,7 +162,7 @@ public class Release4 {
         mainPanel.setLayout(null);
 
         JLabel letsDoIt = new JLabel("Please enter a task to be added or deleted");
-        letsDoIt.setBounds(100, 20, 80, 25);
+        letsDoIt.setBounds(100, 20, 300, 25);
         mainPanel.add(letsDoIt);
 
         JLabel userLabel = new JLabel("Task Name");
