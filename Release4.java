@@ -1,4 +1,4 @@
-package SU.CIS454;
+package SU.CIS454;  //Please comment out this line when testing
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,12 +13,13 @@ public class Release4 {
     private static String usr_name;
     private static String[] to_do_string = {"Task1", "Task2", "Task3"};
     private static JList to_do_list;
+    private static String suggestion;
 
 
-    public static void landing_page (String name) {
+    public static void landing_page () {
 
         mainPanel = new JPanel();
-        frame.setSize(500,500);
+        frame.setSize(700,500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(mainPanel);
         //mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -42,8 +43,8 @@ public class Release4 {
         titleLabel = new JLabel("LET'S DO IT!");
         titleLabel.setFont(new Font("Serif", Font.PLAIN, 40));
 
-        String str = "Hello, " + name + "!"; //We can change user here from input
-        helloLabel= new JLabel(str);
+        //suggestion = "Hello, " + usr_name + "!"; //We can change user here from input
+        helloLabel= new JLabel(suggestion);
         helloLabel.setFont(new Font("Serif", Font.PLAIN, 20) );
 
         //button = new JButton("Button 1");
@@ -82,7 +83,13 @@ public class Release4 {
         //c.weightx = 0.5;
         mainPanel.add(taskScrollPanel, c);
 
-        JButton suggestionButton = new JButton("Suggestion");
+        JButton suggestionButton = new JButton(new AbstractAction("Suggestion") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.remove(mainPanel);
+                suggestion_page();
+            }
+        });
         c.ipady = 50;
         //c.weighty= 0;
         c.gridheight = 1;
@@ -119,7 +126,7 @@ public class Release4 {
     public static void welcome () {
         mainPanel = new JPanel();
         //frame = new JFrame();
-        frame.setSize(500, 500);
+        frame.setSize(700, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(mainPanel);
 
@@ -142,7 +149,8 @@ public class Release4 {
             public void actionPerformed(ActionEvent e) {
                 usr_name = userText.getText();
                 frame.remove(mainPanel);
-                landing_page(usr_name);
+                suggestion = "Hello, " + usr_name + "!";
+                landing_page();
             }
         });
 
@@ -181,7 +189,8 @@ public class Release4 {
                 lst.add(task);
                 to_do_string = lst.toArray(new String[0]);
                 frame.remove(mainPanel);
-                landing_page(usr_name);
+                //suggestion = "Hello, " + usr_name + "!";
+                landing_page();
             }
         });
         add.setBounds(30, 110, 80, 25);
@@ -195,7 +204,8 @@ public class Release4 {
                 lst.remove(task);
                 to_do_string = lst.toArray(new String[0]);
                 frame.remove(mainPanel);
-                landing_page(usr_name);
+                //suggestion = "Hello, " + usr_name + "!";
+                landing_page();
             }
         });
         delete.setBounds(120, 110, 80, 25);
@@ -209,11 +219,71 @@ public class Release4 {
                 //lst.add(task);
                 to_do_string = new String[] {};
                 frame.remove(mainPanel);
-                landing_page(usr_name);
+                //suggestion = "Hello, " + usr_name + "!";
+                landing_page();
             }
         });
         empty.setBounds(210, 110, 130, 25);
         mainPanel.add(empty);
+
+        frame.setVisible(true);
+    }
+
+    public static void suggestion_page() {
+        mainPanel = new JPanel();
+        //frame = new JFrame();
+        frame.setSize(500, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(mainPanel);
+
+        mainPanel.setLayout(null);
+
+        JLabel letsDoIt = new JLabel("Please enter the task name");
+        letsDoIt.setBounds(100, 20, 300, 25);
+        mainPanel.add(letsDoIt);
+
+        JLabel userLabel = new JLabel("Task Name");
+        userLabel.setBounds(30, 50, 80, 25);
+        mainPanel.add(userLabel);
+
+        JTextField userText = new JTextField();
+        userText.setBounds(120, 50, 165, 25);
+        mainPanel.add(userText);
+
+        JLabel timeToBeReminded = new JLabel("Start time (XX:XX AM/PM DD/MM/YYYY)");
+        timeToBeReminded.setBounds(100, 80, 300, 25);
+        mainPanel.add(timeToBeReminded);
+
+        JLabel timeLabel = new JLabel("Time");
+        timeLabel.setBounds(30, 110, 80, 25);
+        mainPanel.add(timeLabel);
+
+        JTextField timeText = new JTextField();
+        timeText.setBounds(120, 110, 165, 25);
+        mainPanel.add(timeText);
+
+        JButton createButton = new JButton(new AbstractAction("Create Suggestion") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                suggestion = usr_name + ", your task (" + userText.getText() + ") starts at " + timeText.getText();
+                frame.remove(mainPanel);
+
+                landing_page();
+            }
+        });
+        createButton.setBounds(210, 140, 140, 25);
+        mainPanel.add(createButton);
+
+        JButton exitButton = new JButton(new AbstractAction("exit") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.remove(mainPanel);
+                //suggestion = "Hello, " + usr_name + "!";
+                landing_page();
+            }
+        });
+        exitButton.setBounds(210, 170, 120, 25);
+        mainPanel.add(exitButton);
 
         frame.setVisible(true);
     }
