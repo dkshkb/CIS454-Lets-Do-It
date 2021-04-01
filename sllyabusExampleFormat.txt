@@ -1,0 +1,11 @@
+CIS 454 			//Name of the class
+3				//Number of assignments
+Homework 1			//Name of the assignment
+Make a scene with animals 	//Description of the assignment
+03/08/2021			//Due date of the assignment
+Homework 2			
+Create a menu to order food
+DUE DATE: 04/09/2021
+Homework 3 
+DESC: ay ay ay ay
+10/21/2021

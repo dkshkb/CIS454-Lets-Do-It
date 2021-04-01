@@ -1,0 +1,11 @@
+CLASS NAME
+3
+Homework 1
+Make a scene with animals 
+03/08/2021
+Homework 2
+Create a menu to order food
+DUE DATE: 04/09/2021
+Homework 3 
+DESC: ay ay ay ay
+10/21/2021
