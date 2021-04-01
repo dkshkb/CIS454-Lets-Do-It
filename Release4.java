@@ -1,4 +1,4 @@
-package SU.CIS454;  //Please comment out this line when testing
+//package SU.CIS454;  //Please comment out this line when testing
 
 import javax.swing.*;
 import java.awt.*;
