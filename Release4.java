@@ -3,6 +3,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.lang.Object;
@@ -27,8 +30,8 @@ public class Release4 {
     private static JList to_do_list;
     private static String suggestion;
 
-    //creates hashmap to store all the assignments in and a count to denote the different sllyabi that have been parsed
-    public static int sllyCount = 0;
+    //creates hashmap to store all the assignments in and a count to denote the different syllabi that have been parsed
+    public static int syllCount = 0;
     static HashMap assignments = new HashMap<String , String[]>();
     static int numAssignments;
 
@@ -125,7 +128,18 @@ public class Release4 {
         c.gridy = 3;
         mainPanel.add(uploadButton, c);
 
-        JButton calendarButton = new JButton("Calendar");
+        JButton calendarButton = new JButton(new AbstractAction("Calendar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://calendar.google.com"));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                } catch (URISyntaxException uriSyntaxException) {
+                    uriSyntaxException.printStackTrace();
+                }
+            }
+        });
         c.gridx = 1;
         c.gridy = 4;
         mainPanel.add(calendarButton, c);
@@ -321,18 +335,18 @@ public class Release4 {
             File fileLoc = new File(loc);
             Scanner scan = new Scanner(fileLoc);
             String className = scan.nextLine();
-            //get the number of assignments from the top of the sllyabus
+            //get the number of assignments from the top of the syllabus
             numAssignments = Integer.parseInt(scan.nextLine());
             String assignmentName;
             String assignmentDesc;
             String assignmentDueDate;
 
-            //the path of my C:\Users\trelo\OneDrive\Desktop\sllyabusExample.txt
-            // for loop to parse the sllyabus
+            //the path of my C:\Users\trelo\OneDrive\Desktop\syllabusExample.txt
+            // for loop to parse the syllabus
             for (int i = 0; i < numAssignments; i++){
                 //name of the key for the hashmap
-                String dicName = "hw" + (sllyCount + i);
-                sllyCount++;
+                String dicName = "hw" + (syllCount + i);
+                syllCount++;
                 //Name of the assignment stored in the
                 assignmentName = scan.nextLine();
                 //Description of the assignment
@@ -359,7 +373,7 @@ public class Release4 {
         frame.add(mainPanel);
         mainPanel.setLayout(null);
 
-        JLabel letsDoIt = new JLabel("Enter file path of sllyabus to get assignemnt");
+        JLabel letsDoIt = new JLabel("Enter file path of syllabus to get assignemnt");
         letsDoIt.setBounds(100, 20, 300, 25);
         mainPanel.add(letsDoIt);
 
@@ -440,7 +454,7 @@ public class Release4 {
             String str = "Name: " + set.getValue()[0]
                     + " (" + set.getValue()[1] + ") Due: "
                     + set.getValue()[2];
-            lst.add(str); // Need to modify
+            lst.add(str);
         }
         String[] assignment_string = lst.toArray(new String[0]);
 
